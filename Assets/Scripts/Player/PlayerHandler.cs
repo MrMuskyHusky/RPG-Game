@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public class PlayerHandler : MonoBehaviour
 {
     [Header("Value Variables")]
@@ -20,12 +21,13 @@ public class PlayerHandler : MonoBehaviour
     public Color flashColor = new Color(1, 0, 0, 0.2f);
     AudioSource playerAudio;
     bool isDead;
-    bool damage;
+    bool damaged;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        // Display health
+        playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -45,6 +47,21 @@ public class PlayerHandler : MonoBehaviour
         {
             curStamina = Mathf.Clamp(curStamina, 0, maxStamina);
             staminaBar.value = Mathf.Clamp01(curStamina / maxStamina);
+        }
+        // Damage op
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            damaged = true;
+            curHealth -= 5;
+        }
+        if(damaged)
+        {
+            damageImage.color = flashColor;
+            damaged = false;
+        }
+        else
+        {
+            damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace RPG.Player
         //Reference Variable
         private CharacterController _charController;
 
+        private bool isSprinting = false;
         private void Start()
         {
             _charController = GetComponent<CharacterController>();
@@ -28,21 +29,27 @@ namespace RPG.Player
         {
             if (_charController.isGrounded)
             {
+                bool isCrouchPressed = Input.GetButton("Crouch");
+                bool isSprintPressed = Input.GetButton("Sprint");
+
                 //set speed
-                if (Input.GetButton("Sprint"))
+                if (isCrouchPressed && isSprintPressed)
+                {
+                    moveSpeed = walkSpeed;
+                }
+                else if (isSprintPressed)
                 {
                     moveSpeed = runSpeed;
                 }
-                else if (Input.GetButton("Crouch"))
+                else if (isCrouchPressed)
                 {
                     moveSpeed = crouchSpeed;
-                    runSpeed = crouchSpeed;
                 }
                 else
                 {
                     moveSpeed = walkSpeed;
                 }
-                
+
                 //move this direction based off inputs
                 _moveDir = transform.TransformDirection(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * moveSpeed);
                 if (Input.GetButton("Jump"))
