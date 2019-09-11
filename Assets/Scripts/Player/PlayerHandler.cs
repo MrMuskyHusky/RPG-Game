@@ -81,6 +81,11 @@ public class PlayerHandler : MonoBehaviour
     }
     void Revive()
     {
+        isDead = false;
+
+        curHealth = maxHealth;
+        curMana = maxMana;
+        curStamina = maxStamina;
         deathImage.gameObject.GetComponent<Animator>().SetTrigger("Alive");
     }
 }
