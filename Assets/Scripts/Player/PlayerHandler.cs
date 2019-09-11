@@ -24,6 +24,11 @@ public class PlayerHandler : MonoBehaviour
     public static bool isDead;
     bool damaged;
 
+    [Header("Check Point")]
+    public Transform curCheckPoint;
+    [Header("Save")]
+    public PlayerPrefSave saveAndLoad;
+
     private void Start()
     {
         // Display health
@@ -87,5 +92,13 @@ public class PlayerHandler : MonoBehaviour
         curMana = maxMana;
         curStamina = maxStamina;
         deathImage.gameObject.GetComponent<Animator>().SetTrigger("Alive");
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("CheckPoint"))
+        {
+            curCheckPoint = other.transform;
+            saveAndLoad.Save();
+        }
     }
 }

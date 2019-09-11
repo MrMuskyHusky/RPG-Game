@@ -47,7 +47,7 @@ public class PlayerPrefSave : MonoBehaviour
     {
         PlayerDataToSave data = PlayerSaveToBinary.LoadData(player);
         player.name = data.playerName;
-
+        player.curCheckPoint = GameObject.Find(data.checkPoint).GetComponent<Transform>();
         player.maxHealth = data.maxHealth;
         player.maxMana = data.maxMana;
         player.maxStamina = data.maxStamina;
@@ -80,6 +80,7 @@ public class PlayerPrefSave : MonoBehaviour
         player.maxHealth = 100;
         player.maxMana = 100;
         player.maxStamina = 100;
+        player.curCheckPoint = GameObject.Find("First Checkpoint").GetComponent<Transform>();
 
         player.curHealth = player.maxHealth;
         player.curMana = player.maxMana;
