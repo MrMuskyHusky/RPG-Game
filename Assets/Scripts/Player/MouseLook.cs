@@ -39,18 +39,22 @@ namespace RPG.Player
         }
         void Update()
         {
-            // Checks if the axis is MouseX
-            if(axis == RotationalAxis.MouseX)
+            if (!PlayerHandler.isDead)
             {
-                // Checks if the x axis is
-                transform.Rotate(0,Input.GetAxis("Mouse X")* Sensitivity * Time.deltaTime,0);
-            }
-            else
-            {
-                _rotY += Input.GetAxis("Mouse Y") * Sensitivity * Time.deltaTime;
-                _rotY = Mathf.Clamp(_rotY, minY, maxY);
-                transform.localEulerAngles = new Vector3(-_rotY,0,0);
+                // Checks if the axis is MouseX
+                if (axis == RotationalAxis.MouseX)
+                {
+                    // Checks if the x axis is
+                    transform.Rotate(0, Input.GetAxis("Mouse X") * Sensitivity * Time.deltaTime, 0);
+                }
+                else
+                {
+                    _rotY += Input.GetAxis("Mouse Y") * Sensitivity * Time.deltaTime;
+                    _rotY = Mathf.Clamp(_rotY, minY, maxY);
+                    transform.localEulerAngles = new Vector3(-_rotY, 0, 0);
+                }
             }
         }
     }
 }
+ 

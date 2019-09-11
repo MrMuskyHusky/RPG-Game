@@ -27,41 +27,45 @@ namespace RPG.Player
         }
         private void Move()
         {
-            if (_charController.isGrounded)
+            if (!PlayerHandler.isDead) // If we are alive, move Player
             {
-                bool isCrouchPressed = Input.GetButton("Crouch");
-                bool isSprintPressed = Input.GetButton("Sprint");
+                // If we are grounded
+                if (_charController.isGrounded)
+                {
+                    bool isCrouchPressed = Input.GetButton("Crouch");
+                    bool isSprintPressed = Input.GetButton("Sprint");
 
-                //set speed
-                if (isCrouchPressed && isSprintPressed)
-                {
-                    moveSpeed = walkSpeed;
-                }
-                else if (isSprintPressed)
-                {
-                    moveSpeed = runSpeed;
-                }
-                else if (isCrouchPressed)
-                {
-                    moveSpeed = crouchSpeed;
-                }
-                else
-                {
-                    moveSpeed = walkSpeed;
-                }
+                    //set speed
+                    if (isCrouchPressed && isSprintPressed)
+                    {
+                        moveSpeed = walkSpeed;
+                    }
+                    else if (isSprintPressed)
+                    {
+                        moveSpeed = runSpeed;
+                    }
+                    else if (isCrouchPressed)
+                    {
+                        moveSpeed = crouchSpeed;
+                    }
+                    else
+                    {
+                        moveSpeed = walkSpeed;
+                    }
 
-                //move this direction based off inputs
-                _moveDir = transform.TransformDirection(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * moveSpeed);
-                if (Input.GetButton("Jump"))
-                {
-                    _moveDir.y = jumpSpeed;
+                    //move this direction based off inputs
+                    _moveDir = transform.TransformDirection(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * moveSpeed);
+                    if (Input.GetButton("Jump"))
+                    {
+                        _moveDir.y = jumpSpeed;
+                    }
                 }
+                //Regardless if we are grounded or not
+                //apply grvity
+                _moveDir.y -= _gravity * Time.deltaTime;
+                //apply mo
+                _charController.Move(_moveDir * Time.deltaTime);
             }
-            //Regardless if we are grounded or not
-            //apply grvity
-            _moveDir.y -= _gravity * Time.deltaTime;
-            //apply mo
-            _charController.Move(_moveDir * Time.deltaTime);
         }
     }
 }

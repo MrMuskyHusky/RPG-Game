@@ -16,14 +16,14 @@ public class PlayerHandler : MonoBehaviour
     public Slider staminaBar, manaBar;
     [Header("Damage Effect Variables")]
     public Image damageImage;
+    public Image deathImage;
     public AudioClip deathClip;
     public float flashSpeed = 5;
     public Color flashColor = new Color(1, 0, 0, 0.2f);
     AudioSource playerAudio;
-    bool isDead;
+    public static bool isDead;
     bool damaged;
 
-    // Start is called before the first frame update
     private void Start()
     {
         // Display health
@@ -48,13 +48,17 @@ public class PlayerHandler : MonoBehaviour
             curStamina = Mathf.Clamp(curStamina, 0, maxStamina);
             staminaBar.value = Mathf.Clamp01(curStamina / maxStamina);
         }
+        if (curHealth <= 0 && !isDead)
+        {
+            Death();
+        }
         // Damage op
         if (Input.GetKeyDown(KeyCode.X))
         {
             damaged = true;
             curHealth -= 5;
         }
-        if(damaged)
+        if(damaged && !isDead)
         {
             damageImage.color = flashColor;
             damaged = false;
@@ -63,5 +67,20 @@ public class PlayerHandler : MonoBehaviour
         {
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
+    }
+    void Death()
+    {
+        // Set the death flag to this function isn't called again
+        isDead = true;
+
+        // Set the AudioSource to play the death clip
+        playerAudio.clip = deathClip;
+        playerAudio.Play();
+        deathImage.gameObject.GetComponent<Animator>().SetTrigger("isDead");
+        Invoke("Revive", 9f);
+    }
+    void Revive()
+    {
+        deathImage.gameObject.GetComponent<Animator>().SetTrigger("Alive");
     }
 }
