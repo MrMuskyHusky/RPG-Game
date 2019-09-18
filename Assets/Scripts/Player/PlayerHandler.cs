@@ -17,6 +17,7 @@ public class PlayerHandler : MonoBehaviour
     [Header("Damage Effect Variables")]
     public Image damageImage;
     public Image deathImage;
+    public Text text;
     public AudioClip deathClip;
     public float flashSpeed = 5;
     public Color flashColor = new Color(1, 0, 0, 0.2f);
@@ -77,21 +78,32 @@ public class PlayerHandler : MonoBehaviour
     {
         // Set the death flag to this function isn't called again
         isDead = true;
+        text.text = "";
 
         // Set the AudioSource to play the death clip
         playerAudio.clip = deathClip;
         playerAudio.Play();
         deathImage.gameObject.GetComponent<Animator>().SetTrigger("isDead");
+        Invoke("DeathText", 2f);
+        Invoke("ReviveText", 6f);
         Invoke("Revive", 9f);
     }
     void Revive()
     {
+        text.text = "";
         isDead = false;
-
         curHealth = maxHealth;
         curMana = maxMana;
         curStamina = maxStamina;
         deathImage.gameObject.GetComponent<Animator>().SetTrigger("Alive");
+    }
+    void DeathText()
+    {
+        text.text = "You've Fallen in Battle...";
+    }
+    void ReviveText()
+    {
+        text.text = "...But the Gods have decided it isn't your time";
     }
     private void OnTriggerEnter(Collider other)
     {
