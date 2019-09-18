@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     public AIState state;
     public float curHealth, maxHealth, moveSpeed, attackRange, attackSpeed, sightRange;
     public int curWaypoint;
+    public bool isDead;
 
     [Space(5), Header("Base References")]
     public GameObject self;
@@ -25,6 +26,7 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent agent;
     public GameObject healthCanvas;
     public Image healthBar;
+    public Animator anim;
 
     public void Start()
     {
@@ -32,12 +34,19 @@ public class Enemy : MonoBehaviour
         agent = self.GetComponent<NavMeshAgent>();
         curWaypoint = 1;
         agent.speed = moveSpeed;
+        anim = self.GetComponent<Animator>();
         Patrol();
     }
     private void Update()
     {
+        anim.SetBool("Walk", false);
+        anim.SetBool("Run", false);
+        anim.SetBool("Attack", false);
+
         Patrol();
         Seek();
+        Attack();
+        Die();
     }
 
     public void Patrol()
@@ -47,6 +56,7 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
+        anim.SetBool("Walk", true);
         // Follow waypoints
         // Set agent to target
         agent.destination = waypoints[curWaypoint].position;
@@ -75,22 +85,35 @@ public class Enemy : MonoBehaviour
             return;
         }
         state = AIState.Seek;
+        anim.SetBool("Run", true);
         // If player in sight range and not attack range then chase
         agent.destination = player.position;
     }
     public virtual void Attack()
     {
-        if(Vector3.Distance(player.position, self.transform.position) > attackRange)
+        if (Vector3.Distance(player.position, self.transform.position) > attackRange || curHealth < 0)
         {
             return;
         }
         state = AIState.Attack;
-        Debug.Log("Attacking");
+        anim.SetBool("Attack", true);
+        Debug.Log("Attack");
         // If player in attack range then attack
     }
     public void Die()
     {
+        // If we are alive
+        if (curHealth > 0)
+        {
+            // Don't run this
+            return;
+        }
+        // else we are dead so run this
         state = AIState.Die;
-        // If health is <= 0 #Dead
+        if(!isDead)
+        anim.SetTrigger("Die");
+        isDead = true;
+        agent.destination = self.transform.position;
+        // Drop Loot
     }
 }

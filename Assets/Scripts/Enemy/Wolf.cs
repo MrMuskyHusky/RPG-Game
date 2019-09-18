@@ -10,6 +10,10 @@ public class Wolf : Enemy
 
     public override void Attack()
     {
+        if(Vector3.Distance(player.position, self.transform.position) > attackRange)
+        {
+            return;
+        }
         Debug.Log("Action 1");
 
         base.Attack();

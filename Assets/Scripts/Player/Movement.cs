@@ -16,7 +16,6 @@ namespace RPG.Player
         //Reference Variable
         private CharacterController _charController;
 
-        private bool isSprinting = false;
         private void Start()
         {
             _charController = GetComponent<CharacterController>();
