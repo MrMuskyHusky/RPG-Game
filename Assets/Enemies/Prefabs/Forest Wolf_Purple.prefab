@@ -246,7 +246,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
 --- !u!1 &5934555122974138881
 GameObject:
@@ -1088,12 +1088,14 @@ MonoBehaviour:
   attackSpeed: 1.5
   sightRange: 25
   curWaypoint: 0
-  self: {fileID: 0}
+  isDead: 0
+  self: {fileID: 5934555122974139265}
   player: {fileID: 0}
   waypointParent: {fileID: 0}
   agent: {fileID: 1704831680}
   healthCanvas: {fileID: 982306625}
   healthBar: {fileID: 1389750690}
+  anim: {fileID: 0}
   curStamina: 1
   maxStamina: 1
 --- !u!1 &5934555122974139267
