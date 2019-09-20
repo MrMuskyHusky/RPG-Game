@@ -1455,7 +1455,7 @@ GameObject:
   - component: {fileID: 3937412422040212450}
   - component: {fileID: 3937412423882418587}
   - component: {fileID: 3937412423882418582}
-  - component: {fileID: 3937412423882418584}
+  - component: {fileID: 7114131960687065608}
   m_Layer: 0
   m_Name: GoblinSlingshot03
   m_TagString: Untagged
@@ -1537,7 +1537,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3937412423882418584
+--- !u!114 &7114131960687065608
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1546,15 +1546,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3937412422032924792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf1558f14210f264698fcec8b56d3b30, type: 3}
+  m_Script: {fileID: 11500000, guid: aa8e9a5fb28249847b2585afbdb4f30f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
   curHealth: 10
   maxHealth: 10
-  moveSpeed: 4
-  attackRange: 15
-  attackSpeed: 1
+  moveSpeed: 3
+  attackRange: 4
+  attackSpeed: 1.5
   sightRange: 25
   curWaypoint: 0
   isDead: 0
@@ -1564,7 +1564,9 @@ MonoBehaviour:
   agent: {fileID: 3937412423882418582}
   healthCanvas: {fileID: 3937412422268690592}
   healthBar: {fileID: 3937412422034900472}
-  anim: {fileID: 0}
+  anim: {fileID: 3937412422040212450}
+  curStamina: 10
+  maxStamina: 10
 --- !u!1 &3937412422032924794
 GameObject:
   m_ObjectHideFlags: 0

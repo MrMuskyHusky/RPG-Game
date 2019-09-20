@@ -112,7 +112,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 1.73}
-  m_SizeDelta: {x: 150.2087, y: 33.3}
+  m_SizeDelta: {x: 150.2087, y: 33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &982306629
 Canvas:
@@ -961,8 +961,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5934555122974506913}
   - component: {fileID: 5934555122964648001}
-  - component: {fileID: 1704831680}
   - component: {fileID: 1704831682}
+  - component: {fileID: 1704831680}
   - component: {fileID: 1704831683}
   m_Layer: 0
   m_Name: Forest Wolf_Purple
@@ -1032,6 +1032,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1704831682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934555122974139265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae1b12b05b9ab048a950c09497de0f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthCanvas: {fileID: 982306625}
+  healthBar: {fileID: 1389750690}
 --- !u!195 &1704831680
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1054,20 +1068,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1704831682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5934555122974139265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ae1b12b05b9ab048a950c09497de0f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthCanvas: {fileID: 982306625}
-  healthBar: {fileID: 1389750690}
 --- !u!114 &1704831683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1095,7 +1095,7 @@ MonoBehaviour:
   agent: {fileID: 1704831680}
   healthCanvas: {fileID: 982306625}
   healthBar: {fileID: 1389750690}
-  anim: {fileID: 0}
+  anim: {fileID: 5934555122964648001}
   curStamina: 1
   maxStamina: 1
 --- !u!1 &5934555122974139267

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Goblin : Enemy
+public class SkeletonMage : Enemy
 {
-    [Header("Goblin Stats")]
+    [Header("SkeletonMage Stats")]
     public float curStamina;
     public float maxStamina;
 

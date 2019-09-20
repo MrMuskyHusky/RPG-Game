@@ -20,4 +20,15 @@ public class Wolf : Enemy
 
         Debug.Log("Action 2");
     }
+    public void BiteAttack()
+    {
+        int critChance = Random.Range(0, 21);
+        float critDamage = 0;
+        if(critChance == 20)
+        {
+            critDamage = Random.Range(baseDamage / 2, baseDamage * difficulty);
+        }
+        Debug.Log("BiteAttack");
+        player.GetComponent<PlayerHandler>().curHealth -= (baseDamage * difficulty)+ critDamage;
+    }
 }
