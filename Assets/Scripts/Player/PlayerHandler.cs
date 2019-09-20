@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class PlayerHandler : MonoBehaviour
 {
     [Header("Value Variables")]
-    public float maxHealth;
-    public float maxMana, maxStamina;
     public float curHealth;
-    public float curMana, curStamina;
+    public float curMana, curStamina, maxHealth, maxMana, maxStamina, healRate;
+    [SerializeField]
+    public Stats[] stats;
     [Header("Value Variables")]
     public Slider healthBar;
     public Slider staminaBar, manaBar;
@@ -24,6 +24,8 @@ public class PlayerHandler : MonoBehaviour
     AudioSource playerAudio;
     public static bool isDead;
     bool damaged;
+    bool canHeal;
+    float healTimer;
 
     [Header("Check Point")]
     public Transform curCheckPoint;
@@ -58,13 +60,15 @@ public class PlayerHandler : MonoBehaviour
         {
             Death();
         }
+#if UNITY_EDITOR
         // Damage op
         if (Input.GetKeyDown(KeyCode.X))
         {
             damaged = true;
             curHealth -= 5;
         }
-        if(damaged && !isDead)
+#endif
+        if (damaged && !isDead)
         {
             damageImage.color = flashColor;
             damaged = false;
@@ -72,6 +76,21 @@ public class PlayerHandler : MonoBehaviour
         else
         {
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
+        }
+        if(!canHeal && curHealth < maxHealth && curHealth > 0)
+        {
+            healTimer += Time.deltaTime;
+            if(healTimer >= 5)
+            {
+                canHeal = true;
+            }
+        }
+    }
+    private void LateUpdate()
+    {
+        if(curHealth < maxHealth && curHealth > 0 && canHeal)
+        {
+            HealOverTime();
         }
     }
     void Death()
@@ -110,7 +129,29 @@ public class PlayerHandler : MonoBehaviour
         if (other.gameObject.CompareTag("CheckPoint"))
         {
             curCheckPoint = other.transform;
+            healRate = 5;
             saveAndLoad.Save();
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Checkpoint"))
+        {
+            healRate = 0;
+        }
+    }
+
+    public void DamagePlayer(float damage)
+    {
+        damaged = true;
+        curHealth -= damage;
+        canHeal = false;
+        healTimer = 0;
+    }
+    
+    public void HealOverTime()
+    {
+        curHealth += Time.deltaTime * (healRate + stats[2].statValue);
     }
 }

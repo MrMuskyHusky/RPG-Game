@@ -28,7 +28,7 @@ public class Wolf : Enemy
         {
             critDamage = Random.Range(baseDamage / 2, baseDamage * difficulty);
         }
-        Debug.Log("BiteAttack");
-        player.GetComponent<PlayerHandler>().curHealth -= (baseDamage * difficulty)+ critDamage;
+        Debug.Log("Bite");
+        player.GetComponent<PlayerHandler>().DamagePlayer(baseDamage * difficulty + critDamage);
     }
 }

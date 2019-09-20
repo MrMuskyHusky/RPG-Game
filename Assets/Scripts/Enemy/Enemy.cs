@@ -49,6 +49,20 @@ public class Enemy : MonoBehaviour
         Die();
     }
 
+    void LateUpdate()
+    {
+        if (healthBar.fillAmount < 1 && healthBar.fillAmount > 0)
+        {
+            healthCanvas.SetActive(true);
+            healthCanvas.transform.LookAt(Camera.main.transform);
+            healthCanvas.transform.Rotate(0, 180, 0);
+        }
+        else if (healthCanvas.activeSelf == true)
+        {
+            healthCanvas.SetActive(false);
+        }
+    }
+
     public void Patrol()
     {
         // DO NOT CONTINUE IF NO WAYPOINTS
