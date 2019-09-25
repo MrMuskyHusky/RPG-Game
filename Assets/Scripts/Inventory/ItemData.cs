@@ -61,16 +61,28 @@ public static class ItemData
             #endregion
             #region Food 300 - 399
             case 300:
-                name = "";
-                description = "";
-                amount = 0;
-                value = 0;
+                name = "Apple";
+                description = "Munchies and Crunchies";
+                amount = 1;
+                value = 1;
                 damage = 0;
                 armour = 0;
-                heal = 0;
-                iconName = "";
-                meshName = "";
-                type = ItemTypes.Misc;
+                heal = 2;
+                iconName = "Food/Apple";
+                meshName = "Food/Apple";
+                type = ItemTypes.Food;
+                break;
+            case 301:
+                name = "Meat";
+                description = "Mmmmmmm Yummy";
+                amount = 1;
+                value = 5;
+                damage = 0;
+                armour = 0;
+                heal = 5;
+                iconName = "Food/Meat";
+                meshName = "Food/Meat";
+                type = ItemTypes.Food;
                 break;
             #endregion
             #region Ingredient 400 - 499

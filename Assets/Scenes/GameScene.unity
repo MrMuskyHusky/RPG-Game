@@ -12484,6 +12484,8 @@ GameObject:
   - component: {fileID: 939249693}
   - component: {fileID: 939249692}
   - component: {fileID: 939249691}
+  - component: {fileID: 939249695}
+  - component: {fileID: 939249696}
   m_Layer: 0
   m_Name: Kevin
   m_TagString: NPC
@@ -12564,6 +12566,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &939249695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939249690}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749169312cc74ec45abd6cf0eda397ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Index: 0
+  option: 0
+  text:
+  - Next
+  - Next
+  - Next
+  - Next
+  - Next
+  showDlg: 0
+--- !u!114 &939249696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939249690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447731381b37847419feaab72b520f9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Index: 0
+  option: 0
+  loop: 0
+  text:
+  - Hello Adventure,Would you like me to tell you a tale?
+  - There was once a knight, who died from cancer.
+  - Yeah thats it really, he just died from cancer.
+  - I hope your adventure goes well.
+  - Goodbye.
+  showDlg: 1
 --- !u!1001 &943480305
 PrefabInstance:
   m_ObjectHideFlags: 0
