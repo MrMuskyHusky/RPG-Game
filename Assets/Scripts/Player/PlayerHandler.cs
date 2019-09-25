@@ -6,14 +6,21 @@ using UnityEngine.UI;
 [RequireComponent(typeof(AudioSource))]
 public class PlayerHandler : MonoBehaviour
 {
+    [System.Serializable]
+    public struct PlayerStats
+    {
+        public string name;
+        public int value;
+    }
     [Header("Value Variables")]
     public float curHealth;
     public float curMana, curStamina, maxHealth, maxMana, maxStamina, healRate;
-    [SerializeField]
-    public Stats[] stats;
+    public PlayerStats[] stats;
+
     [Header("Value Variables")]
     public Slider healthBar;
     public Slider staminaBar, manaBar;
+
     [Header("Damage Effect Variables")]
     public Image damageImage;
     public Image deathImage;
@@ -152,6 +159,6 @@ public class PlayerHandler : MonoBehaviour
     
     public void HealOverTime()
     {
-        curHealth += Time.deltaTime * (healRate + stats[2].statValue);
+        curHealth += Time.deltaTime * (healRate + stats[2].value);
     }
 }
