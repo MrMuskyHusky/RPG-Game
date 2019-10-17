@@ -84,6 +84,18 @@ public static class ItemData
                 meshName = "Food/Meat";
                 type = ItemTypes.Food;
                 break;
+            case 302:
+                name = "Sandwich";
+                description = "Home made Sandwich";
+                amount = 1;
+                value = 5;
+                damage = 0;
+                armour = 0;
+                heal = 5;
+                iconName = "Food/Sandwich";
+                meshName = "Food/Sandwich";
+                type = ItemTypes.Food;
+                break;
             #endregion
             #region Ingredient 400 - 499
             case 400:

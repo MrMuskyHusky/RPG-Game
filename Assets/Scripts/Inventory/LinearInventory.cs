@@ -15,6 +15,7 @@ public class LinearInventory : MonoBehaviour
     {
         inv.Add(ItemData.CreateItem(300));
         inv.Add(ItemData.CreateItem(301));
+        inv.Add(ItemData.CreateItem(302));
         showInv = true;
     }
     void OnGUI()
