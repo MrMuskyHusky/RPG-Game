@@ -54,10 +54,22 @@ public static class ItemData
                 meshName = "Armor_3";
                 type = ItemTypes.Armour;
                 break;
+            case 3:
+                name = "Armor Helmet";
+                description = "Special Armor for protection for your Head";
+                amount = 1;
+                value = 1;
+                damage = 0;
+                armour = 1;
+                heal = 0;
+                iconName = "Armour/Helmet";
+                meshName = "Armour/Helmet";
+                type = ItemTypes.Armour;
+                break;
             #endregion
             #region Weapon 100 - 199
             case 100:
-                name = "Axe_1";
+                name = "Axe";
                 description = "";
                 amount = 1;
                 value = 10;
@@ -69,7 +81,7 @@ public static class ItemData
                 type = ItemTypes.Weapon;
                 break;
             case 101:
-                name = "Sword_2";
+                name = "Sword";
                 description = "";
                 amount = 1;
                 value = 10;
@@ -81,7 +93,7 @@ public static class ItemData
                 type = ItemTypes.Weapon;
                 break;
             case 102:
-                name = "Axe_3";
+                name = "Special Axe";
                 description = "";
                 amount = 1;
                 value = 10;
@@ -90,6 +102,18 @@ public static class ItemData
                 heal = 0;
                 iconName = "Axe_3";
                 meshName = "Axe_3";
+                type = ItemTypes.Weapon;
+                break;
+            case 103:
+                name = "Mini Axe";
+                description = "";
+                amount = 1;
+                value = 10;
+                damage = 20;
+                armour = 0;
+                heal = 0;
+                iconName = "Weapon/Axe";
+                meshName = "Weapon/Axe";
                 type = ItemTypes.Weapon;
                 break;
             #endregion
