@@ -24,6 +24,16 @@ public class Interact : MonoBehaviour
                 switch (hitInfo.collider.tag)
                 {
                     case "NPC":
+                        Dialogue dlg = hitInfo.transform.GetComponent<Dialogue>();
+                        if(dlg != null)
+                        {
+                            dlg.showDlg = true;
+
+                            Time.timeScale = 0;
+
+                            Cursor.visible = true;
+                            Cursor.lockState = CursorLockMode.None;
+                        }
                         Debug.Log("Talk to NPC");
                         break;
 
@@ -31,15 +41,6 @@ public class Interact : MonoBehaviour
                         Debug.Log("Pick up Item");
                         break;
                 }
-
-                /*if (hitInfo.collider.CompareTag("NPC"))
-                {
-                    Debug.Log("Talk to NPC is Triggered");
-                }
-                if(hitInfo.collider.tag == "Item")
-                {
-                    Debug.Log("Pick up Item");
-                }*/
             }
         }
     }

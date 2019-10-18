@@ -36,6 +36,9 @@ public class Dialogue : MonoBehaviour
             {
                 if (GUI.Button(new Rect(scr.x * 14.25f, scr.y * 8.35f, scr.x * 1.5f, scr.y * 0.5f), "Bye."))
                 {
+                    Time.timeScale = 1;
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
                     Index = 0;
                     showDlg = false;
                 }
