@@ -22,7 +22,7 @@ public static class ItemData
                 name = "Armor Chest";
                 description = "Special Armor for protection for your chest";
                 amount = 1;
-                value = 1;
+                value = 120;
                 damage = 0;
                 armour = 1;
                 heal = 0;
@@ -62,7 +62,7 @@ public static class ItemData
                 damage = 0;
                 armour = 1;
                 heal = 0;
-                iconName = "Armour/Helmet";
+                iconName = "Helmet_1";
                 meshName = "Armour/Helmet";
                 type = ItemTypes.Armour;
                 break;
@@ -112,7 +112,7 @@ public static class ItemData
                 damage = 20;
                 armour = 0;
                 heal = 0;
-                iconName = "Weapon/Axe";
+                iconName = "Axe_2";
                 meshName = "Weapon/Axe";
                 type = ItemTypes.Weapon;
                 break;
@@ -332,17 +332,17 @@ public static class ItemData
                 meshName = "";
                 type = ItemTypes.Misc;
                 break;
-            case 702:
-                name = "";
+            case 999:
+                name = "Gold";
                 description = "";
-                amount = 0;
-                value = 0;
+                amount = 01;
+                value = 01;
                 damage = 0;
                 armour = 0;
                 heal = 0;
                 iconName = "";
                 meshName = "";
-                type = ItemTypes.Misc;
+                type = ItemTypes.Money;
                 break;
             #endregion
             default:

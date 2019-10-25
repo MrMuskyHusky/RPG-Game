@@ -8,6 +8,8 @@ TagManager:
   - Item
   - curCheckPoint
   - CheckPoint
+  - Chest
+  - Shop
   layers:
   - Default
   - TransparentFX
