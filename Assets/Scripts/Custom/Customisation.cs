@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Customisation : MonoBehaviour
 {
@@ -14,6 +16,8 @@ public class Customisation : MonoBehaviour
     public int skinIndex, eyesIndex, mouthIndex, hairIndex, clothesIndex, armourIndex;
     public int skinMax, eyesMax, mouthMax, hairMax, clothesMax, armourMax;
     public string characterName = "Adventurer";
+    public PlayerHandler player;
+    public PlayerPrefSave saveNew;
     [System.Serializable]
     public struct Stats
     {
@@ -69,8 +73,31 @@ public class Customisation : MonoBehaviour
 
     public void Save()
     {
-        
-        
+        // New Char Base Info
+        player.maxHealth = 100;
+        player.maxMana = 100;
+        player.maxStamina = 100;
+
+        player.curHealth = player.maxHealth;
+        player.curMana = player.maxMana;
+        player.curStamina = player.maxStamina;
+
+        // New Char Stats
+        player.skinIndex = skinIndex;
+        player.eyesIndex = eyesIndex;
+        player.mouthIndex = mouthIndex;
+        player.hairIndex = hairIndex;
+        player.clothesIndex = clothesIndex;
+        player.armourIndex = armourIndex;
+
+        player.characterClass = characterClass;
+        player.characterName = characterName;
+        for (int i = 0; i < playerStats.Length; i++)
+        {
+            player.stats[i].value = (playerStats[i].statValue + playerStats[i].tempStat);
+        }
+        saveNew.Save();
+        SceneManager.LoadScene(2);
     }
     public void SetTexture(string type, int dir)
     {
@@ -155,6 +182,11 @@ public class Customisation : MonoBehaviour
         scr = new Vector2 (Screen.width / 16, Screen.height / 9);
         DisplayCustom();
         DisplayStats();
+
+        if(GUI.Button(new Rect(scr.x * 7.15f, scr.y * 0.5f, scr.x * 2, scr.y * 0.5f), "Save"))
+        {
+            Save();
+        }
     }
     void DisplayCustom()
     {
@@ -315,12 +347,15 @@ public class Customisation : MonoBehaviour
                 }
             }
             GUI.Box(new Rect(scr.x * 14.15f, 2 * scr.y + s *(0.5f * scr.y), scr.x * 1.2f, scr.y * 0.5f), playerStats[s].statName + ": " +(playerStats[s].statValue + playerStats[s].tempStat));
-
-            if(GUI.Button(new Rect(scr.x * 13.65f, 2 * scr.y + s *(0.5f * scr.y), scr.x * 0.5f, scr.y * 0.5f), "-"))
+            if(points < 10 && playerStats[s].tempStat > 0)
             {
-                points++;
-                playerStats[s].tempStat--;
+                if (GUI.Button(new Rect(scr.x * 13.65f, 2 * scr.y + s * (0.5f * scr.y), scr.x * 0.5f, scr.y * 0.5f), "-"))
+                {
+                    points++;
+                    playerStats[s].tempStat--;
+                }
             }
+          
         }
     }
     #endregion

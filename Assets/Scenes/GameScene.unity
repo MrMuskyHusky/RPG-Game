@@ -3442,6 +3442,7 @@ GameObject:
   m_Component:
   - component: {fileID: 297930207}
   - component: {fileID: 297930206}
+  - component: {fileID: 297930208}
   m_Layer: 0
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -3476,6 +3477,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &297930208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297930205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91d59a25e92da3545b2eb8f227c39e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 584957964}
 --- !u!1 &329888558
 GameObject:
   m_ObjectHideFlags: 0
@@ -10833,6 +10847,16 @@ MonoBehaviour:
   flashColor: {r: 1, g: 0, b: 0, a: 0.2}
   curCheckPoint: {fileID: 1566460944}
   saveAndLoad: {fileID: 1750283359}
+  custom: 0
+  skinIndex: 0
+  eyesIndex: 0
+  mouthIndex: 0
+  hairIndex: 0
+  clothesIndex: 0
+  armourIndex: 0
+  characterClass: 0
+  characterName: 
+  firstCheckPointName: First Checkpoint
 --- !u!82 &584957965
 AudioSource:
   m_ObjectHideFlags: 0
@@ -23353,6 +23377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 584957964}
+  custom: 0
 --- !u!4 &1750283360
 Transform:
   m_ObjectHideFlags: 0
@@ -27576,6 +27601,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1032638848, guid: c456a0245f3fd1947a2136ad48390324, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250408321065520838, guid: c456a0245f3fd1947a2136ad48390324,
+        type: 3}
+      propertyPath: m_TagString
+      value: Renderer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6432047058100714132, guid: c456a0245f3fd1947a2136ad48390324,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c456a0245f3fd1947a2136ad48390324, type: 3}
 --- !u!1001 &3937412423158715358
@@ -27833,16 +27872,6 @@ PrefabInstance:
       propertyPath: waypointParent
       value: 
       objectReference: {fileID: 1768718100}
-    - target: {fileID: 4471369229446447026, guid: cbe1dd2d9175b994f9608cb5f08de586,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4471369228620676307, guid: cbe1dd2d9175b994f9608cb5f08de586,
-        type: 3}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbe1dd2d9175b994f9608cb5f08de586, type: 3}
 --- !u!1001 &7541408111466970277

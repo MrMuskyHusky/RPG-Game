@@ -12,6 +12,7 @@ public class PlayerHandler : MonoBehaviour
         public string name;
         public int value;
     }
+
     [Header("Value Variables")]
     public float curHealth;
     public float curMana, curStamina, maxHealth, maxMana, maxStamina, healRate;
@@ -38,7 +39,12 @@ public class PlayerHandler : MonoBehaviour
     public Transform curCheckPoint;
     [Header("Save")]
     public PlayerPrefSave saveAndLoad;
-
+    [Header("Custom")]
+    public bool custom;
+    public int skinIndex, eyesIndex, mouthIndex, hairIndex, clothesIndex, armourIndex;
+    public CharacterClass characterClass;
+    public string characterName;
+    public string firstCheckPointName = "First Checkpoint";
     private void Start()
     {
         // Display health
@@ -48,25 +54,28 @@ public class PlayerHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (healthBar.value != Mathf.Clamp01(curHealth / maxHealth))
+        if (!custom)
         {
-            curHealth = Mathf.Clamp(curHealth, 0, maxHealth);
-            healthBar.value = Mathf.Clamp01(curHealth / maxHealth);
-        }
-        if (healthBar.value != Mathf.Clamp01(curMana / maxMana))
-        {
-            curMana = Mathf.Clamp(curMana, 0, maxMana);
-            manaBar.value = Mathf.Clamp01(curMana / maxMana);
-        }
-        if (healthBar.value != Mathf.Clamp01(curStamina / maxStamina))
-        {
-            curStamina = Mathf.Clamp(curStamina, 0, maxStamina);
-            staminaBar.value = Mathf.Clamp01(curStamina / maxStamina);
-        }
-        if (curHealth <= 0 && !isDead)
-        {
-            Death();
-        }
+            if (healthBar.value != Mathf.Clamp01(curHealth / maxHealth))
+            {
+                curHealth = Mathf.Clamp(curHealth, 0, maxHealth);
+                healthBar.value = Mathf.Clamp01(curHealth / maxHealth);
+            }
+            if (healthBar.value != Mathf.Clamp01(curMana / maxMana))
+            {
+                curMana = Mathf.Clamp(curMana, 0, maxMana);
+                manaBar.value = Mathf.Clamp01(curMana / maxMana);
+            }
+            if (healthBar.value != Mathf.Clamp01(curStamina / maxStamina))
+            {
+                curStamina = Mathf.Clamp(curStamina, 0, maxStamina);
+                staminaBar.value = Mathf.Clamp01(curStamina / maxStamina);
+            }
+            if (curHealth <= 0 && !isDead)
+            {
+                Death();
+            }
+        
 #if UNITY_EDITOR
         // Damage op
         if (Input.GetKeyDown(KeyCode.X))
@@ -84,14 +93,15 @@ public class PlayerHandler : MonoBehaviour
         {
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
-        if(!canHeal && curHealth < maxHealth && curHealth > 0)
+        if (!canHeal && curHealth < maxHealth && curHealth > 0)
         {
             healTimer += Time.deltaTime;
-            if(healTimer >= 5)
+            if (healTimer >= 5)
             {
                 canHeal = true;
             }
         }
+    }
     }
     private void LateUpdate()
     {

@@ -5,18 +5,10 @@ using UnityEngine;
 public class PlayerPrefSave : MonoBehaviour
 {
     public PlayerHandler player;
-    float x, y, z;
-    private void Awake()
+    public bool custom;
+    private void Start()
     {
-        if (!PlayerPrefs.HasKey("Loaded"))
-        {
-            PlayerPrefs.DeleteAll();
-            FirstLoad();
-            PlayerPrefs.SetInt("Loaded", 0);
-            Save();
-            // Save Binary Data
-        }
-        else
+        if(!custom)
         {
             // Load Binary shiz
             Load();
@@ -26,20 +18,6 @@ public class PlayerPrefSave : MonoBehaviour
     public void Save()
     {
         PlayerSaveToBinary.SavePlayerData(player);
-        /* Health, Mana, Stamina
-        PlayerPrefs.SetFloat("CurHealth", player.curHealth);
-        PlayerPrefs.SetFloat("CurMana", player.curMana);
-        PlayerPrefs.SetFloat("CurStamina", player.curStamina);
-        // Position
-        PlayerPrefs.SetFloat("PlayerX", player.transform.position.x);
-        PlayerPrefs.SetFloat("PlayerY", player.transform.position.y);
-        PlayerPrefs.SetFloat("PlayerZ", player.transform.position.z);
-        // Rotation
-        PlayerPrefs.SetFloat("PlayerRotX", player.transform.rotation.x);
-        PlayerPrefs.SetFloat("PlayerRotY", player.transform.rotation.y);
-        PlayerPrefs.SetFloat("PlayerRotZ", player.transform.rotation.z);
-        PlayerPrefs.SetFloat("PlayerRotW", player.transform.rotation.w);
-        */
     }
 
     // Update is called once per frame
@@ -48,6 +26,7 @@ public class PlayerPrefSave : MonoBehaviour
         PlayerDataToSave data = PlayerSaveToBinary.LoadData(player);
         player.name = data.playerName;
         player.curCheckPoint = GameObject.Find(data.checkPoint).GetComponent<Transform>();
+
         player.maxHealth = data.maxHealth;
         player.maxMana = data.maxMana;
         player.maxStamina = data.maxStamina;
@@ -56,37 +35,36 @@ public class PlayerPrefSave : MonoBehaviour
         player.curMana = data.curMana;
         player.curStamina = data.curStamina;
 
-        player.transform.position = new Vector3(data.pX, data.pY, data.pZ);
-        player.transform.rotation = new Quaternion(data.rX, data.rY, data.rZ, data.rW);
+        if(!(data.pX == 0 && data.pY == 0 && data.pZ == 0))
+        {
+            player.transform.position = new Vector3(data.pX, data.pY, data.pZ);
+            player.transform.rotation = new Quaternion(data.rX, data.rY, data.rZ, data.rW);
+        }
+        else
+        {
+            player.transform.position = player.curCheckPoint.position;
+            player.transform.rotation = player.curCheckPoint.rotation;
+        }
 
-        /* players current health is set to PlayerPrefs saved float called CurHealth, else set it to MaxHealth
-        player.curHealth = PlayerPrefs.GetFloat("CurHealth", player.maxHealth);
-        player.curMana = PlayerPrefs.GetFloat("CurMana", player.maxMana);
-        player.curStamina = PlayerPrefs.GetFloat("CurStamina", player.maxStamina);
-        // Position
-       /* x = PlayerPrefs.GetFloat("PlayerX", 1);
-        y = PlayerPrefs.GetFloat("PlayerY", 1);
-        z = PlayerPrefs.GetFloat("PlayerZ", 1);
+        player.skinIndex = data.skinIndex;
+        player.hairIndex = data.hairIndex;
+        player.mouthIndex = data.mouthIndex;
+        player.eyesIndex = data.eyesIndex;
+        player.clothesIndex = data.clothesIndex;
+        player.armourIndex = data.armourIndex;
 
-        player.transform.position = new Vector3(PlayerPrefs.GetFloat("PlayerX", 29.51f), PlayerPrefs.GetFloat("PlayerY", 51f), PlayerPrefs.GetFloat("PlayerZ", 59.14f));
-        player.transform.rotation = new Quaternion(PlayerPrefs.GetFloat("PlayerRotX", 0), PlayerPrefs.GetFloat("PlayerRotY", 0), PlayerPrefs.GetFloat("PlayerRotZ", 0), PlayerPrefs.GetFloat("PlayerRotW", 0));
-        Debug.Log("Last player position");
-        */
-    }
-    void FirstLoad()
-    {
-        player.name = "Kevin";
+        player.characterClass = (CharacterClass)data.classIndex;
+        player.characterName = data.playerName;
 
-        player.maxHealth = 100;
-        player.maxMana = 100;
-        player.maxStamina = 100;
-        player.curCheckPoint = GameObject.Find("First Checkpoint").GetComponent<Transform>();
-
-        player.curHealth = player.maxHealth;
-        player.curMana = player.maxMana;
-        player.curStamina = player.maxStamina;
-
-        player.transform.position = new Vector3(29.51f, 51f, 59.14f);
-        player.transform.rotation = new Quaternion(0,0,0,0);
+        for (int i = 0; i < player.stats.Length; i++)
+        {
+            player.stats[i].value = data.stats[i];
+        }
+        LoadCustomisation.SetTexture("Skin", data.skinIndex);
+        LoadCustomisation.SetTexture("Hair", data.hairIndex);
+        LoadCustomisation.SetTexture("Mouth", data.mouthIndex);
+        LoadCustomisation.SetTexture("Eyes", data.eyesIndex);
+        LoadCustomisation.SetTexture("Clothes", data.clothesIndex);
+        LoadCustomisation.SetTexture("Armour", data.armourIndex);
     }
 }
